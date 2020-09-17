@@ -1,0 +1,7 @@
+1) Getting Cantino
+
+Go to https://github.com/QQuick/Cantino and follow the instructions for using only the library.
+
+2) Accessing the serial port
+
+sudo chmod a+rw "/dev/ttyUSB0 
