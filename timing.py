@@ -34,16 +34,17 @@ class Timing (sp.Chart):
         ct = sp.world.control
         
         self.channel (ct.led, sp.red)
-        self.channel (ct.hemi,sp.blue)
+        self.channel (ct.follow, sp.green)
+        self.channel (ct.south,sp.blue)
 
         self.channel (ct.downButton, sp.yellow)
         self.channel (ct.upButton, sp.yellow)
-        self.channel (ct.declTargetPos, sp.yellow, -ct.finity, ct.finity, 50)
-        self.channel (ct.declSpeed, sp.yellow, 0, ct.maxSpeed, 25)
+        self.channel (ct.declGoalDist, sp.yellow, -ct.goalDist, ct.goalDist, 50)
+        self.channel (ct.declSpeed, sp.yellow, 0, ct.maxSpeed, 100)
 
         self.channel (ct.leftButton, sp.white)
         self.channel (ct.rightButton, sp.white)
-        self.channel (ct.raTargetPos, sp.white, -ct.finity, ct.finity, 50)
-        self.channel (ct.raSpeed, sp.white, 0, ct.maxSpeed, 25)
+        self.channel (ct.raGoalDist, sp.white, -ct.goalDist, ct.goalDist, 50)
+        self.channel (ct.raSpeed, sp.white, 0, ct.maxSpeed, 100)
         
         

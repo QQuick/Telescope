@@ -27,33 +27,33 @@ Removing this header ends your licence.
 #include <Adafruit_MotorShield.h>
 
 auto motorShield = Adafruit_MotorShield ();
-auto manualMode = DOUBLE;
-auto autoMode = MICROSTEP;
+auto mode = DOUBLE;
 
 // ====== Create decl stepper
 
-auto *declMotor = motorShield.getStepper (48, 1);
+auto *declMotor = motorShield.getStepper (48, 2);
+
 
 void forwardStepDecl () {  
-  declMotor->onestep (FORWARD, manualMode);
+  declMotor->onestep (FORWARD, mode);
 }
 
 void backwardStepDecl () {  
-  declMotor->onestep (BACKWARD, manualMode);
+  declMotor->onestep (BACKWARD, mode);
 }
 
 auto declStepper = AccelStepper (forwardStepDecl, backwardStepDecl);
 
 // ====== Create ra stepper
 
-auto *raMotor = motorShield.getStepper (48, 2);
+auto *raMotor = motorShield.getStepper (48, 1);
 
 void forwardStepRa () {  
-  raMotor->onestep (FORWARD, leftCombi || rightComi ? manualMode : autoMode);
+  raMotor->onestep (BACKWARD, mode);
 }
 
 void backwardStepRa () {  
-  raMotor->onestep (BACKWARD, manualMode);
+  raMotor->onestep (FORWARD, mode);
 }
 
 auto raStepper = AccelStepper (forwardStepRa, backwardStepRa);
@@ -86,11 +86,11 @@ void loop () {
     digitalWrite (4, led);
     
     declStepper.setMaxSpeed (declSpeed);
-    declStepper.moveTo (-declTargetPos);
+    declStepper.move (declGoalDist);
     declStepper.run ();
     
     raStepper.setMaxSpeed (raSpeed);
-    raStepper.moveTo (-raTargetPos);
+    raStepper.move (raGoalDist);
     raStepper.run ();
     
 }       
