@@ -41,70 +41,70 @@
 
 # Microstepping not yet implemented in this code
 
-import SimPyLC as sp
+from SimPyLC import *
 
-class Control (sp.Module):
+class Control (Module):
     def __init__ (self):
-        sp.Module.__init__ (self)  
+        Module.__init__ (self)  
         
         self.page ('Telescope control')
         
         self.group ('Inputs', True)
 
-        self.downButton = sp.Marker ()
-        self.upButton = sp.Marker ()
-        self.declActualPos = sp.Register ()
+        self.downButton = Marker ()
+        self.upButton = Marker ()
+        self.declActualPos = Register ()
 
-        self.leftButton = sp.Marker ()
-        self.rightButton = sp.Marker ()
-        self.raActualPos = sp.Register ()
+        self.leftButton = Marker ()
+        self.rightButton = Marker ()
+        self.raActualPos = Register ()
                 
         self.group ('Outputs')
-        self.led = sp.Marker ()
+        self.led = Marker ()
 
-        self.declSpeed = sp.Register ()
-        self.declTargetPos = sp.Register ()
+        self.declSpeed = Register ()
+        self.declTargetPos = Register ()
 
-        self.raSpeed = sp.Register ()
-        self.raTargetPos = sp.Register ()
+        self.raSpeed = Register ()
+        self.raTargetPos = Register ()
         
         self.group ('System')
-        self.runner = sp.Runner ()
+        self.runner = Runner ()
         
         self.group ('Toggles')
         
-        self.followToggleCombi = sp.Marker ()
-        self.followToggle = sp.Oneshot ()
-        self.follow = sp.Marker ()
+        self.followToggleCombi = Marker ()
+        self.followToggle = Oneshot ()
+        self.follow = Marker ()
 
-        self.ledToggleCombi = sp.Marker ()
-        self.ledToggle = sp.Oneshot ()
-        self.ledFull = sp.Marker ()
-        self.ledCount = sp.Register ()
+        self.ledToggleCombi = Marker ()
+        self.ledToggle = Oneshot ()
+        self.ledFull = Marker ()
+        self.ledCount = Register ()
 
-        self.southToggleCombi = sp.Marker ()
-        self.southToggle = sp.Oneshot ()
-        self.south = sp.Marker ()
+        self.southToggleCombi = Marker ()
+        self.southToggle = Oneshot ()
+        self.south = Marker ()
 
         self.group ('Motions', True)
 
-        self.declDownCombi = sp.Marker ()
-        self.declUpCombi = sp.Marker ()
-        self.declGoalDist = sp.Register ()
+        self.declDownCombi = Marker ()
+        self.declUpCombi = Marker ()
+        self.declGoalDist = Register ()
 
-        self.raLeftCombi = sp.Marker ()
-        self.raRightCombi = sp.Marker ()
-        self.raGoalDist = sp.Register ()
-        self.raAnyCombi = sp.Marker ()
-        self.raBaseSpeed = sp.Register ()
+        self.raLeftCombi = Marker ()
+        self.raRightCombi = Marker ()
+        self.raGoalDist = Register ()
+        self.raAnyCombi = Marker ()
+        self.raBaseSpeed = Register ()
 
         self.group ('Constants')
 
-        self.goalDist = sp.Register (1000)
-        self.followSpeed = sp.Register (9.6)
+        self.goalDist = Register (1000)
+        self.followSpeed = Register (9.6)
         
-        self.minSpeed = sp.Register (1)
-        self.maxSpeed = sp.Register (200)
+        self.minSpeed = Register (1)
+        self.maxSpeed = Register (200)
             
     def sweep (self):
         self.followToggleCombi.mark (not self.downButton and not self.upButton and self.leftButton and self.rightButton)
